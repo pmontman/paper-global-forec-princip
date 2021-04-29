@@ -45,8 +45,8 @@ similar to the Mcomp, with elements:
 
  * $x The observed time series
  * $xx The future part
- * $id
- * $feat
+ * $id (optional)
+ * $feat Features of the series, for some models (optional, used in some experiments)
 
 Another parameter is `fit_model_fun`, the modeling function, it can be
 `linear_model`, `poly_2_model`, `poly_3_model`, `tree_model`, `deep_model`.
