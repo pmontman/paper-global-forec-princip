@@ -1,7 +1,12 @@
 # global-forecasting
 Paper on global and local methods for time series forecasting.
-Intended for reproducibility of the results in the paper
-TITLE, not for actual forecasting (though it can be used as such, it is not supported).
+Intended for reproducibility of the results in the paper:
+
+**Principles and Algorithms for Forecasting Groups of Time Series: Locality and Globality**
+
+https://arxiv.org/abs/2008.00444
+
+Not actual forecasting tools! (though it can be used as such, it is not supported).
 
 Everything in the repo is based on R (code, datasets) and Latex.
 
@@ -18,9 +23,14 @@ Everything in the repo is based on R (code, datasets) and Latex.
 
 ## Installation instructions
 
-Because the data is quite large, besides checking the repo
-the file: LINK should be downloaded and extracted in the src folder.
-So you should have src/data and src/results folders after extracting.
+Because the data is quite large, besides checking the repo,
+the file:
+
+https://github.com/pmontman/paper-global-forec-princip/releases/download/data-results/data-results.zip
+
+
+Should be downloaded and extracted in the src/ folder.
+So you should have src/data and src/results folders after extracting data-results.zip.
 
 
 
@@ -42,7 +52,7 @@ Another parameter is `fit_model_fun`, the modeling function, it can be
 `linear_model`, `poly_2_model`, `poly_3_model`, `tree_model`, `deep_model`.
 
 Another parameter is `MASE_norm`, whether to apply normalization by the MASE denominator
-to each series. It is `TRUE` by default, this normalzation was applied to most experiments in the paper.
+to each series. It is `TRUE` by default, this normalization was applied to most experiments in the paper.
 
 Another parameter is `lag_range`, the lags orders to experiment with, for example 
 `lag_range=20:50` will compute the forecasts for all global models from lag 20 to lag 50.
@@ -65,10 +75,12 @@ development cycle. How to run them again should be self-explanatory given the da
 
 ## Analyzing the experiments
 
-The code to 
+The code to analyze the experiments is in src/analysis.R,
+for creating the plots and tables in the paper.
+It requires the results to be downloaded (see Instructions section) or reproduced
 
+Numerical results can be further scrutinized by looking at the files in the /src/results folder.
 
-Analyze
 
 ## Datasets
 The folder src/data contains the datasets that were used in the experiments.
