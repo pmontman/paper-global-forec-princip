@@ -79,7 +79,11 @@ The code to analyze the experiments is in src/analysis.R,
 for creating the plots and tables in the paper.
 It requires the results to be downloaded (see Instructions section) or reproduced
 
-Numerical results can be further scrutinized by looking at the files in the /src/results folder.
+Numerical results can be further scrutinized by looking at the files in the src/results folder.
+For example the file src/results/total_experiment.RData loads the list `list_results`
+with the results for the M1-M4/Tourism yearly/quarterly/monthly datasets. Examining
+this list gives the errors in MASE and SMAPE for the benchmark models and the ones
+used in the paper.
 
 
 ## Datasets
