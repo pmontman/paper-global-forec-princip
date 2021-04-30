@@ -32,7 +32,33 @@ https://github.com/pmontman/paper-global-forec-princip/releases/download/data-re
 Should be downloaded and extracted in the src/ folder.
 So you should have src/data and src/results folders after extracting data-results.zip.
 
+## A quick note
 
+If mainly interested how the global models described in the paper work can be implemented,
+here is a simple example for illustration purposes.
+
+```R
+series_list #lets say this is a list of time series, each series is a vector
+lag = 16    #the order of the autoregression
+
+#time delay embedding / lagmatrices and stacking of all time series in one line of code
+X = do.call("rbind", lapply(series_list, function(x) embed(x, lag+1)))
+Y = X[,1]; X = X[,-1] #creating output and input matrices (embed() in R reverses the order)
+global_ar = lm(Y~X-1) #and here is our Global AR or order 16.
+
+#we could also use another model class instead of a lm()
+#once we get the X, Y matrices is like a regression problem!
+
+###
+#prediction of the next time step of one input series
+#because of embed() we reverse the order of the input
+rev(tail(series_list[[1]], lag)) %*% global_ar$coefficients
+```
+
+This is not exactly how it is implemented in this project.
+There are complications such as preprocessing (e.g. normalization), additional features, etc. and also
+performance reasons, a large set of time series for a big lag order will produce a
+GBs size matrix, so it requires chunking and optimization strategies such as stochastic gradient descent.
 
 
 ## Basic Global Models
@@ -60,7 +86,9 @@ Another parameter is `lag_range`, the lags orders to experiment with, for exampl
 The parameter `model_name` just identifies the model that is being used with the given string, attaching the lag order,
 in the output forecasts.
 
-The output of `analyze_glob_model` are the average errors calculated for the dataset: MAE, SMAPE.
+The output of `analyze_glob_model` are the average errors calculated for the dataset: MAE, SMAPE, for each of the models.
+
+Example of usage in the experiments code.
 
 ## Experiments
 
@@ -88,6 +116,6 @@ used in the paper.
 
 ## Datasets
 The folder src/data contains the datasets that were used in the experiments.
-The filer src/pre_datasets.R has the code to process the datasets from their raw values
-to version it was finally used (data sources, data cleaning and so on).
+The file src/pre_datasets.R has the code to process the datasets from their raw values
+to the version it was finally used (data sources, data cleaning and so on).
 
